@@ -1,15 +1,20 @@
 <h1>Buku Penghubung Online</h1>
+Buku penghubung online adalah program yang dibuat untuk memudahkan komunikasi antara guru dengan orang tua murid TK atau sederajat.
+Buku penghubung online ini dibuat dengan framework Laravel dan design menggunakan framework Boostrap dengan theme Cerulean (https://bootswatch.com/cerulean/)
 
-Buku penghubung online ini dibuat dengan framework boostrap dengan themes Cerulean (https://bootswatch.com/cerulean/)
-Sumber penting
+## Catatan
+Program ini adalah proyek sederhana yang tujuan awal dibuatnya untuk proyek skripsi, sangat disarankan untuk mengecek, mengupdate & menyempurnakan program ini kembali sebelum digunakan pada stage Production.
 
-- http://lifestyle.okezone.com/read/2011/01/20/196/416223/buku-penghubung-komunikasi-antara-guru-murid-orangtua
-- http://eprints.uny.ac.id/25090/1/dinar%20lyana%20adi%20putra.pdf
-- https://prezi.com/rfwzwx33vwod/aplikasi-buku-penghubung-berbasis-web-studi-kasus-smpn-34-bandung/
-- https://prezi.com/jwvuqkg1djyy/aplikasi-buku-penghubung-berbasis-web/
+## Fitur
 
-## About Laravel
+- Membuat daftar admin, guru dan siswa
+- Membuat daftar kelas
+- Membuat topik buku penghubung yang dapat dibaca & dibalas oleh orang tua siswa
+- Membuat pengumuman untuk seluruh sekolah, semua guru, semua siswa dan siswa dalam 1 kelas saja
+- Menampilkan laporan aktifitas komunikasi antara guru dan orang tua murid
 
+
+## Tentang Laravel
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
