@@ -1,0 +1,115 @@
+body {
+	letter-spacing: 1.2px;
+	font-size: 13px;
+}
+
+/* Brand */
+.bpo .navbar-brand {
+	display: block;
+	padding: 20px 15px;
+	height: auto;
+}
+
+/* Nav */
+.bpo .navbar-nav > li > a {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.bpo .navbar-nav > li.menu-with-icon > a {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+	.bpo .navbar-nav li > a i {
+		font-size: 27px;
+	}
+	.bpo .navbar-nav > li > a > span.badge {
+		position: absolute;
+		top: 10px;
+		right: 5px;
+		font-size: 11px;
+		height: 20px;
+		padding: 5px;
+		text-align: center;
+		background: #F39C12;
+		color: #FFF;
+		font-weight: normal;
+		letter-spacing: normal;
+	}
+.nav-profile img {
+	position: relative;
+	width: 30px;
+	background: #eee;
+	border-radius: 50px;
+}
+
+/* Panel */
+.panel.panel-nopadding .panel-body {
+	padding: 0;
+}
+
+/* Toolbar */
+.toolbar {
+	margin-bottom: 20px;
+}
+
+/* Table */
+.bpo .table {
+	font-size: 13px;
+}
+	.bpo .table tr td {
+		vertical-align: middle;
+	}
+
+/* Forms */
+	/* Radio */
+	.bpo input[type="radio"], 
+	.bpo input[type="checkbox"] {
+		position: relative;
+		margin: 2px 5px 0 0;
+	}
+	.bpo-radio label {
+		border: 1px solid #ddd;
+		padding: 10px 15px;
+		border-radius: 4px;
+	}
+	.bpo .form-group label.error {
+		color: #C71C22;
+		padding-left: 10px;
+		font-weight: normal;
+		padding-top: 5px;
+	}
+	.bpo form span.required {
+		color: #C71C22;
+	}
+	
+/* Login */
+body.login {
+	background: url( '../img/bg-login.png' );
+	background-size: cover;
+	padding-top: 100px;
+}
+
+.panel-heading h1 {
+	padding: 10px 0;
+}
+
+/* Center & Middle */
+.bpo .valign-middle {
+	vertical-align: middle;
+}
+
+/* No padding */
+.no-padding { padding: 0; }
+.no-padding-top-bottom { padding-top: 0; padding-bottom: 0; }
+.no-padding-top { padding-top: 0; }
+.no-padding-bottom { padding-bottom: 0; }
+
+/* No margin */
+.no-margin { margin: 0; }
+.no-margin-top-bottom { margin-top: 0; margin-bottom: 0; }
+.no-margin-top { margin-top: 0; }
+.no-margin-bottom { margin-bottom: 0; }
+
+#data-ortu, #kelas-siswa {
+	display: none;
+}
