@@ -12,7 +12,7 @@
 
 					<!-- Branding Image -->
 					<a class="navbar-brand" href="{{route('dashboard')}}">
-						TKK. Tegal Jaya
+						{{Helper::nama_sekolah()}}
 					</a>
 				</div>
 
@@ -20,6 +20,7 @@
 					<!-- Left Side Of Navbar -->
 					<ul class="nav navbar-nav">
 						<li><a href="{{route('dashboard')}}">Dasbor</a></li>
+
 						<li class="{{ Request::is('admin') || Request::is('admin/*') || Request::is('admin/*/edit') ? 'active' : '' }}">
 							<a href="{{route('admin.index')}}">User</a>
 						</li>
@@ -31,12 +32,17 @@
 						<li class="{{ Request::is('pengumuman') || Request::is('pengumuman/*') || Request::is('pengumuman/*/edit') ? 'active' : '' }}">
 							<a href="{{route('pengumuman.index')}}" >Pengumuman</a>
 						</li>
+
 						<li class="{{ Request::is('topik') || Request::is('topik/*') || Request::is('topik/*/edit') ? 'active' : '' }}">
 							<a href="{{route('topik.index')}}" >Topik</a>
 						</li>
-						<li class="{{ Request::is('profil-sekolah') ? 'active' : '' }}">
-							<a href="{{route('sekolah.index')}}">Profil Sekolah</a>
-						</li>
+
+						@if( Auth::User()->level == 'admin' )								
+							<li class="{{ Request::is('profil-sekolah') ? 'active' : '' }}">
+								<a href="{{route('sekolah.index')}}">Profil Sekolah</a>
+							</li>
+						@endif
+
 					</ul>
 
 					<!-- Right Side Of Navbar -->
@@ -44,12 +50,8 @@
 						<!-- Authentication Links -->
 						@if (Auth::User())
 
-							@if( Auth::User()->level == 'super' )
-								
-							@endif
-
 							<!-- <li><a href="#"><i class="fa fa-bell-o fa-lg"></i> <span class="badge">14</span></a></li> -->
-							<li><a href="#" data-toggle="tooltip" data-placement="bottom" title="14 Balasan topik"><i class="fa fa-book fa-lg"></i> <span class="badge">14</span></a></li>
+							<li><a href="#" data-toggle="tooltip" data-placement="bottom" title="14 diskusi aktif"><i class="fa fa-book fa-lg"></i> <span class="badge">14</span></a></li>
 							<li class="dropdown menu-with-icon">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 									<span class="nav-profile"><img src="{{ asset('uploads/avatars/' . Auth::User()->foto ) }}" alt="{{ Auth::User()->nama }}"></span> 
@@ -57,7 +59,7 @@
 								</a>
 
 								<ul class="dropdown-menu" role="menu">
-									<li class="disabled"><a href="{{ route('admin.edit', Auth::User()->id) }}">{{ Auth::User()->nama }}</a></li>
+									<li class="disabled"><a href="{{ route('admin.edit', Auth::User()->id) }}">{{ Auth::User()->nama }} ({{Auth::User()->level}})</a></li>
 									<li><a href="{{ route('admin.edit', Auth::User()->id) }}">Edit Akun</a></li>
 									<li>
 										<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>

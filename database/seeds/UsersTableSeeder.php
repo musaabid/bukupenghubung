@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder{
 			'jenis_kelamin' 	=> 'L',
 			'alamat'				=> 'Muding Indah IX, Tara residence no. 4',
 			'telepon_1'			=> '087862035757',
+			'foto'				=> '1489152677_19930823001.png',
 			'created_at'		=> date('Y-m-d H:i:s')
 		]);
 		DB::table('users')->insert([
@@ -36,6 +37,7 @@ class UsersTableSeeder extends Seeder{
 			'jenis_kelamin' 	=> 'P',
 			'alamat'				=> 'Muding Indah IX, Tara residence no. 4',
 			'telepon_1'			=> '087861800023',
+			'foto'				=> '1489115191_19940209001.png',
 			'created_at'		=> date('Y-m-d H:i:s')
 		]);
 		DB::table('users')->insert([

@@ -48,16 +48,16 @@
 								<div class="form-group">
 									<label>Level user </label>
 									<div class="bpo-radio">
-										<label class="radio-inline {{$post->level == 'admin' ? 'btn-primary' : ''}}">
-											<input type="radio" name="level" id="optionadmin" value="admin" {{$post->level == 'admin' ? 'checked=""' : ''}}>
+										<label class="radio-inline {{$post->level == 'admin' ? 'btn-primary' : ''}} {{Auth::User()->level != 'admin' ? 'hard-disable' : ''}}">
+											<input type="radio" name="level" id="optionadmin" value="admin" {{$post->level == 'admin' ? 'checked=""' : ''}} {{Auth::User()->level != 'admin' ? 'disabled' : ''}}>
 											Admin
 										</label>
-										<label class="radio-inline {{$post->level == 'guru' ? 'btn-primary' : ''}}">
-											<input type="radio" name="level" id="optionguru" value="guru" {{$post->level == 'guru' ? 'checked=""' : ''}}>
+										<label class="radio-inline {{$post->level == 'guru' ? 'btn-primary' : ''}} {{Auth::User()->level != 'admin' ? 'hard-disable' : ''}}">
+											<input type="radio" name="level" id="optionguru" value="guru" {{$post->level == 'guru' ? 'checked=""' : ''}} {{Auth::User()->level != 'admin' ? 'disabled' : ''}}>
 											Guru
 										</label>
-										<label class="radio-inline {{$post->level == 'siswa' ? 'btn-primary' : ''}}">
-											<input type="radio" name="level" id="optionmurid" value="siswa" {{$post->level == 'siswa' ? 'checked=""' : ''}}>
+										<label class="radio-inline {{$post->level == 'siswa' ? 'btn-primary' : ''}} {{Auth::User()->level != 'admin' ? 'hard-disable' : ''}}">
+											<input type="radio" name="level" id="optionmurid" value="siswa" {{$post->level == 'siswa' ? 'checked=""' : ''}} {{Auth::User()->level != 'admin' ? 'disabled' : ''}}>
 											Siswa
 										</label>
 									</div>
@@ -66,7 +66,7 @@
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
 									<label for="noinduk">Nomor Induk Pengajar / Siswa <span class="required">*</span></label>
-									<input type="text" class="form-control" id="noinduk" name="noinduk" value="{{ $post->noinduk }}" data-rule-number="true" required>
+									<input type="text" class="form-control" id="noinduk" name="noinduk" value="{{ $post->noinduk }}" data-rule-number="true" required {{Auth::User()->level != 'admin' ? 'disabled' : ''}}>
 								</div>
 							</div>
 						</div>

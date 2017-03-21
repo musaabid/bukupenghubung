@@ -113,3 +113,17 @@ body.login {
 #data-ortu, #kelas-siswa {
 	display: none;
 }
+
+.hard-disable {
+	pointer-events: none;
+}
+
+/* Student list */
+.student-list {
+	border: 1px solid #eee;
+	padding: 10px;
+	border-radius: 4px;
+}
+	.student-list h5 {
+		line-height: 1.4;
+	}

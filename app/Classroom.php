@@ -10,7 +10,7 @@ class Classroom extends Model{
 		return $this->hasOne('App\User', 'id');
 	}
 
-	public function student(){
+	public function students(){
 		return $this->hasMany('App\User', 'id_kelas');
 	}
 

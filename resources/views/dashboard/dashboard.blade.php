@@ -9,16 +9,13 @@
 @endsection
 
 @section('content')
-<div class="panel panel-default">
-	<div class="panel-heading">Dashboard</div>
-	<div class="panel-body">
-		Laporan akan ditampilkan disini
-		<ul>
-			<li>Balasan topik yang belum dibaca</li>
-			<li>Statistik jumlah balasan selama 1 bulan terakhir</li>
-			<li>Statistik jumlah topik selama 1 bulan terakhir</li>
-			<li>Topik paling banyak per siswa</li>
-		</ul>
-	</div>
-</div>
+	@if (Auth::User())
+		@if( Auth::User()->level == 'admin' )
+			@include('dashboard._admin')
+		@elseif( Auth::User()->level == 'guru' )
+			@include('dashboard._guru')
+		@elseif( Auth::User()->level == 'siswa' )
+			@include('dashboard._siswa')
+		@endif
+	@endif
 @endsection
