@@ -27,4 +27,10 @@ class Helper {
 		return Carbon::parse($tanggal_lahir)->age;
 	}
 
+	public static function humantime($tanggal){
+		Carbon::setLocale('id');
+		$tanggal = Carbon::parse($tanggal);
+		return $tanggal->diffForHumans();
+	}
+
 }

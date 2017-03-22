@@ -69,7 +69,7 @@
 						<td>
 							@if(Auth::User()->level == 'admin')
 								<a href="{{route('kelas.edit', $classroom->id)}}" title="Edit kelas" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-								<form style="display: inline;" action="{{route('kelas.destroy', $classroom->id)}}" method="POST">
+								<form style="display: inline;" class="deleteForm" action="{{route('kelas.destroy', $classroom->id)}}" method="POST">
 									<input type="hidden" name="_method" value="DELETE">
 									{{ csrf_field() }}
 									<button type="submit" title="Hapus kelas" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>

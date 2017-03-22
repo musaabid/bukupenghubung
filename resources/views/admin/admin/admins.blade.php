@@ -71,7 +71,7 @@
 						<td>
 							@if(Auth::User()->level == 'admin')
 								<a href="{{route('admin.edit', $user->id) }}" title="Edit user" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-								<form style="display: inline;" action="{{route('admin.destroy', $user->id)}}" method="POST">
+								<form style="display: inline;" class="deleteForm" action="{{route('admin.destroy', $user->id)}}" method="POST">
 									<input type="hidden" name="_method" value="DELETE">
 									{{ csrf_field() }}
 									<button type="submit" title="Hapus user" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>

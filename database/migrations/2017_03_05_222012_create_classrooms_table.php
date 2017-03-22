@@ -23,10 +23,6 @@ class CreateClassroomsTable extends Migration
 			$table->timestamps();
 		});
 
-		// Set foreign key di id_kelas dalam table users
-		Schema::table( 'users', function (Blueprint $table) { 
-			$table->foreign('id_kelas')->references('id')->on('classrooms');
-		});
 	}
 
 	/**

@@ -127,3 +127,48 @@ body.login {
 	.student-list h5 {
 		line-height: 1.4;
 	}
+
+/* Discussions */
+.discussions {
+	max-height: 500px;
+	-webkit-box-shadow: inset 0px 0px 16px 0px rgba(224,224,224,1);
+	-moz-box-shadow: inset 0px 0px 16px 0px rgba(224,224,224,1);
+	box-shadow: inset 0px 0px 16px 0px rgba(224,224,224,1);
+	overflow-y: scroll;
+	padding: 20px 0;
+}
+	.topic {
+		padding: 20px;
+		font-weight: bold;
+	}
+	.discussions .discussion-item {
+		padding: 0 20px;
+		margin-bottom: 20px;
+	}
+		.discussion-item-content-wrapper {
+			max-width: 80%;
+		}
+		.discussion-item-content {
+			font-size: 14px;
+			border-radius: 6px;
+			padding: 15px;
+			background: #3498db;
+			color: #FFF;
+			-webkit-box-shadow: 0px 3px 3px 1px rgba(154,165,173,0.56);
+			-moz-box-shadow: 0px 3px 3px 1px rgba(154,165,173,0.56);
+			box-shadow: 0px 3px 3px 1px rgba(154,165,173,0.56);
+		}
+		.discussion-meta {
+			display: block;
+			margin-top: 10px;
+			font-size: 12px;
+			padding: 0 10px;
+			color: #888;
+		}
+			.discussion-item-content-wrapper.pull-right .discussion-meta {
+				text-align: right;
+			}
+
+.discussion-form {
+	padding: 20px;
+}

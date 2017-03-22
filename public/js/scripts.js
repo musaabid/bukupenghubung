@@ -5,14 +5,7 @@
 		// Init bootstrap tooltip
 		$('[data-toggle="tooltip"]').tooltip()
 
-		/* Data table di semua halaman manajemen */
-		$('#datatable').DataTable({
-			responsive: {
-        		details: {
-           		type: "column"
-        		}
-   		},
-			language: {
+		var datatable_language = {
 				search: "Cari",
 				lengthMenu: "Tampilkan _MENU_ data per halaman",
 				zeroRecords: "Maaf, data tidak ditemukan",
@@ -25,7 +18,16 @@
 					next: "Selanjutnya",
 					last: "Terakhir"
 				}
-			},
+		};
+
+		/* Data table di semua halaman manajemen */
+		$('#datatable').DataTable({
+			responsive: {
+        		details: {
+           		type: "column"
+        		}
+   		},
+			language: datatable_language,
 			columnDefs: [
 				{
 					targets: [0,5],
@@ -35,6 +37,25 @@
 			],
 			order: [
 				[ 1, "asc" ]
+			]
+		});
+
+		$('#datatable_diskusi').DataTable({
+			responsive: {
+        		details: {
+           		type: "column"
+        		}
+   		},
+			language: datatable_language,
+			columnDefs: [
+				{
+					targets: [0,5],
+					orderable: false,
+					searchable: false
+				}
+			],
+			order: [
+				[ 3, "asc" ]
 			]
 		});
 
@@ -123,6 +144,45 @@
 			number: 'Silahkan memasukan angka saja.',
 			equalTo: 'Silahkan masukan password yang sama'
 		});
+
+		$('.deleteForm').submit(function(){
+			return confirm('Yakin ingin menghapus data?');
+		});
+
+		// Ajax kirim balasan diskusi
+		$('#sendDiscussion').click(function(sendDiscussion){
+			sendDiscussion.preventDefault();
+			var balasan = $('#discussion_content').val();
+			if( balasan ){
+				$.ajax({
+					url: bp.chatRoute,
+					type: "POST",
+					data: {
+						_token			: Laravel.csrfToken,
+						id_parent 		: bp.id_parent,
+						id_wali_kelas	: bp.id_wali_kelas,
+						id_siswa			: bp.id_siswa,
+						pengirim			: bp.pengirim,
+						isi_diskusi		: balasan
+					},
+					success: function (response) {
+						//location.reload();
+						//console.log(response);
+						$('#discussion_content').val('');
+						$('#discussions').load( location.href + ' #discussions > *');
+						setTimeout(function() {
+							$("#discussions").scrollTop($("#discussions")[0].scrollHeight);
+						}, 1000);
+
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						console.log(textStatus, errorThrown);
+					}
+				});
+			}
+		});
+
+		$("#discussions").scrollTop($("#discussions")[0].scrollHeight);
 
 	});
 

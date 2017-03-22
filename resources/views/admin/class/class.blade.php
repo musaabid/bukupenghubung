@@ -30,7 +30,9 @@
 								<img style="width:100%; margin-bottom: 20px;" class="img-responsive" src="{{asset('uploads/avatars/' . $siswa->foto)}}" alt="{{$siswa->nama}}">
 								<h5 class="text-center">{{$siswa->nama}}</h5>
 								<p class="text-center">{{Helper::usia($siswa->tanggal_lahir)}} tahun</p>
-									<a href="{{route('topik.diskusi', $siswa->id)}}" class="btn btn-block btn-primary">Diskusi</a>
+								@if(Auth::User()->level == 'guru' && $data['kelas']['id_wali_kelas'] == Auth::User()->id)
+									<a href="{{route('diskusi.student', $siswa->id)}}" class="btn btn-block btn-primary">Diskusi</a>
+								@endif
 							</div>
 						</div>
 					@endforeach

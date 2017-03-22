@@ -28,15 +28,14 @@ Route::delete('kelas', 'ClassroomController@bulkDestroy')->name('kelas.bulkDestr
 // Routing pengumuman
 Route::resource('pengumuman', 'AnnouncementController');
 
-// Routing topik
-Route::resource('topik', 'TopicController');
-
 // Routing diskusi
-Route::get('diskusi', 'DiscussionController@index')->name('diskusi.index'); // List semua diskusi
+Route::get('diskusi', 'DiscussionController@index')->name('diskusi.index'); // List semua diskusi, hanya untuk guru
 Route::get('diskusi/{siswa}/siswa', 'DiscussionController@withstudent')->name('diskusi.student'); // List semua diskusi dengan salah satu siswa
+Route::get('diskusi/tambah', 'DiscussionController@create')->name('diskusi.create'); // Halaman untuk menambah diskusi baru
+Route::post('diskusi', 'DiscussionController@store')->name('diskusi.store'); // Fungsi untuk simpan diskusi baru
+Route::post('diskusi/{diskusi}', 'DiscussionController@chat')->name('diskusi.chat'); // Fungsi untuk simpan balasan diskusi
 Route::get('diskusi/{diskusi}', 'DiscussionController@discussion')->name('diskusi.show'); // Tampilkan detail 1 diskusi
 Route::delete('diskusi/{diskusi}', 'DiscussionController@destroy')->name('diskusi.destroy'); // Hampus diskusi
-
 
 // Routing edit profil sekolah
 Route::get('profil-sekolah', 'SchoolController@index')->name('sekolah.index');

@@ -25,6 +25,7 @@ class UsersTableSeeder extends Seeder{
 			'foto'				=> '1489152677_19930823001.png',
 			'created_at'		=> date('Y-m-d H:i:s')
 		]);
+
 		DB::table('users')->insert([
 			'noinduk'			=> 19940209001,
 			'password'			=> bcrypt('password'),
@@ -38,24 +39,6 @@ class UsersTableSeeder extends Seeder{
 			'alamat'				=> 'Muding Indah IX, Tara residence no. 4',
 			'telepon_1'			=> '087861800023',
 			'foto'				=> '1489115191_19940209001.png',
-			'created_at'		=> date('Y-m-d H:i:s')
-		]);
-		DB::table('users')->insert([
-			'noinduk'			=> 12345678910,
-			'password'			=> bcrypt('password'),
-			'level'				=> 'siswa',
-			'nama'				=> 'Olivia Deviant Andreys',
-			'nama_panggilan'	=> 'Olivia',
-			'tempat_lahir'		=> 'Denpasar',
-			'tanggal_lahir'	=> '2011-04-24',
-			'agama'				=> 'Kristen',
-			'jenis_kelamin'	=> 'P',
-			'alamat'				=> 'Dalung Permai blok LL no. 41',
-			'telepon_1'			=> '087861800023',
-			'nama_ayah'			=> 'Robert Nicco Andreys',
-			'pekerjaan_ayah'	=> 'Pendeta',
-			'nama_ibu'			=> 'Fransiska Novianti',
-			'pekerjaan_ibu'		=> 'PNS',
 			'created_at'		=> date('Y-m-d H:i:s')
 		]);
 	}

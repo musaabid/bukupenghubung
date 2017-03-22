@@ -33,8 +33,8 @@
 							<a href="{{route('pengumuman.index')}}" >Pengumuman</a>
 						</li>
 
-						<li class="{{ Request::is('topik') || Request::is('topik/*') || Request::is('topik/*/edit') ? 'active' : '' }}">
-							<a href="{{route('topik.index')}}" >Topik</a>
+						<li class="{{ Request::is('diskusi') || Request::is('diskusi/*') || Request::is('diskusi/*/siswa') ? 'active' : '' }}">
+							<a href="{{route('diskusi.index')}}" >Diskusi</a>
 						</li>
 
 						@if( Auth::User()->level == 'admin' )								

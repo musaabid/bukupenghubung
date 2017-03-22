@@ -14,7 +14,7 @@
 					<div class="panel-heading clearfix">
 						<h1 class="panel-title pull-left">EDIT KELAS</h1>
 						<div class="pull-right">
-							<a href="/kelas" class="btn btn-default">BATAL</a>
+							<a href="{{route('kelas.index')}}" class="btn btn-default">BATAL</a>
 							<button class="btn btn-primary">UPDATE</button>
 						</div>
 					</div>
