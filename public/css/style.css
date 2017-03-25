@@ -123,6 +123,7 @@ body.login {
 	border: 1px solid #eee;
 	padding: 10px;
 	border-radius: 4px;
+	margin-bottom: 20px;
 }
 	.student-list h5 {
 		line-height: 1.4;

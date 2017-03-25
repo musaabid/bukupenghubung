@@ -5,7 +5,13 @@
 @endsection
 
 @section('sidebar')
-	@include('partials._sidebar')
+	@if (Auth::User())
+		@if( Auth::User()->level == 'admin' || Auth::User()->level == 'guru' )
+			@include('partials._sidebar_guru')
+		@elseif( Auth::User()->level == 'siswa' )
+			@include('partials._sidebar_siswa')
+		@endif
+	@endif
 @endsection
 
 @section('content')

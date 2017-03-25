@@ -19,23 +19,32 @@
 				<div class="collapse navbar-collapse" id="app-navbar-collapse">
 					<!-- Left Side Of Navbar -->
 					<ul class="nav navbar-nav">
-						<li><a href="{{route('dashboard')}}">Dasbor</a></li>
 
-						<li class="{{ Request::is('admin') || Request::is('admin/*') || Request::is('admin/*/edit') ? 'active' : '' }}">
-							<a href="{{route('admin.index')}}">User</a>
-						</li>
-						
-						<li class="{{ Request::is('kelas') || Request::is('kelas/*') || Request::is('kelas/*/edit') ? 'active' : '' }}">
-							<a href="{{route('kelas.index')}}" >Kelas</a>
-						</li>
+						@if(Auth::User()->level == 'admin' || Auth::User()->level == 'guru')
+							<li><a href="{{route('dashboard')}}">Dasbor</a></li>
+
+							<li class="{{ Request::is('admin') || Request::is('admin/*') || Request::is('admin/*/edit') ? 'active' : '' }}">
+								<a href="{{route('admin.index')}}">User</a>
+							</li>
+							
+							<li class="{{ Request::is('kelas') || Request::is('kelas/*') || Request::is('kelas/*/edit') ? 'active' : '' }}">
+								<a href="{{route('kelas.index')}}" >Kelas</a>
+							</li>
+						@endif
 						
 						<li class="{{ Request::is('pengumuman') || Request::is('pengumuman/*') || Request::is('pengumuman/*/edit') ? 'active' : '' }}">
 							<a href="{{route('pengumuman.index')}}" >Pengumuman</a>
 						</li>
 
-						<li class="{{ Request::is('diskusi') || Request::is('diskusi/*') || Request::is('diskusi/*/siswa') ? 'active' : '' }}">
-							<a href="{{route('diskusi.index')}}" >Diskusi</a>
-						</li>
+						@if(Auth::User()->level == 'siswa')
+							<li class="{{ Request::is('diskusi') || Request::is('diskusi/*') || Request::is('diskusi/*/siswa') ? 'active' : '' }}">
+								<a href="{{route('diskusi.student', Auth::User()->id)}}" >Diskusi</a>
+							</li>
+						@else
+							<li class="{{ Request::is('diskusi') || Request::is('diskusi/*') || Request::is('diskusi/*/siswa') ? 'active' : '' }}">
+								<a href="{{route('diskusi.index')}}" >Diskusi</a>
+							</li>
+						@endif
 
 						@if( Auth::User()->level == 'admin' )								
 							<li class="{{ Request::is('profil-sekolah') ? 'active' : '' }}">

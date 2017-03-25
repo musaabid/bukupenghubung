@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Classroom extends Model{
 
 	public function teacher(){
-		return $this->hasOne('App\User', 'id');
+		return $this->hasOne('App\User', 'id', 'id_wali_kelas');
 	}
 
 	public function students(){

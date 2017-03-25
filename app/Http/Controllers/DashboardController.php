@@ -21,7 +21,11 @@ class DashboardController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index() {
+	public function index(Request $request) {
+		if($request->user()->level == 'siswa'){
+			return redirect()->route('diskusi.student', $request->user()->id);
+		}
+
 		$pagemeta = array(
 			'title' 			=> 'Dashboard',
 			'body_class' 	=> array( 'login' ) 

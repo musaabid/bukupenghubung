@@ -49,13 +49,32 @@
 			language: datatable_language,
 			columnDefs: [
 				{
-					targets: [0,5],
+					targets: [4],
 					orderable: false,
 					searchable: false
 				}
 			],
 			order: [
 				[ 3, "asc" ]
+			]
+		});
+
+		$('#datatable_diskusi_siswa').DataTable({
+			responsive: {
+        		details: {
+           		type: "column"
+        		}
+   		},
+			language: datatable_language,
+			columnDefs: [
+				{
+					targets: [3],
+					orderable: false,
+					searchable: false
+				}
+			],
+			order: [
+				[ 2, "asc" ]
 			]
 		});
 
@@ -182,8 +201,12 @@
 			}
 		});
 
-		$("#discussions").scrollTop($("#discussions")[0].scrollHeight);
-
+		if( Laravel.route == 'diskusi.show' ){
+			setInterval(function() {
+				$('#discussions').load( location.href + ' #discussions > *');
+				$("#discussions").scrollTop($("#discussions")[0].scrollHeight);
+			}, 1000);
+		}
 	});
 
 

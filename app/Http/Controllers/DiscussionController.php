@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use \Auth;
 use App\User;
 use App\School;
+use App\Classroom;
 use App\Discussion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -31,13 +32,23 @@ class DiscussionController extends Controller{
 
 	// Halamam diskusi dengan satu siswa
 	public function withstudent(Request $request, $id){
-		if( ( $request->user()->level == 'admin' || $request->user()->level == 'guru') && count($request->user()->classroom) > 0 ){
-			$data['discussions'] = Discussion::where([
-				['id_parent', '=', 0],
-				['id_wali_kelas', '=', $request->user()->id],
-				['id_siswa', '=', $id]
-			])->get();
+		if( ($request->user()->level == 'siswa') || ( $request->user()->level == 'admin' || $request->user()->level == 'guru') && count($request->user()->classroom) > 0 ){
 			$data['student'] = User::find($id);
+			if($request->user()->level == 'admin' || $request->user()->level == 'guru'){
+				$data['discussions'] = Discussion::where([
+					['id_parent', '=', 0],
+					['id_wali_kelas', '=', $request->user()->id],
+					['id_siswa', '=', $id]
+				])->get();
+				$data['teacher'] = User::find($request->user()->id);
+			} elseif($request->user()->level == 'siswa') {
+				$data['discussions'] = Discussion::where([
+					['id_parent', '=', 0],
+					['id_wali_kelas', '=', $data['student']->kelas->id_wali_kelas],
+					['id_siswa', '=', $id]
+				])->get();
+				$data['teacher'] = User::find($data['student']->kelas->id_wali_kelas);
+			}
 			return view('admin.discussion.student')->with('data', $data);
 		} else {
 			return view('error.restricted');
@@ -117,10 +128,6 @@ class DiscussionController extends Controller{
 		]);
 	
 	}
-
-
-
-
 
 	// Update data profil
 	public function update(Request $request){

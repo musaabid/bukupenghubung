@@ -21,6 +21,7 @@
 	<script>
 		window.Laravel = {!! json_encode([
 			'csrfToken' => csrf_token(),
+			'route'		=> Route::current()->getName()
 		]) !!};
 	</script>
 </head>

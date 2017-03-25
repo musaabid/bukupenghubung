@@ -27,9 +27,6 @@
 		<table id="datatable_diskusi" class="table table-hover table-bordered">
 			<thead>
 				<tr>
-					<th class="text-center valign-middle">
-						#
-					</th>
 					<th width="30%">Judul</th>
 					<th width="20%">Siswa</th>
 					<th>Dibuat</th>
@@ -40,7 +37,6 @@
 			<tbody>
 				@foreach( $data['discussions'] as $discussion )
 					<tr>
-						<td class="text-center valign-middle">-</td>
 						<td data-search="{{$discussion->judul_diskusi}}">
 							<a href="{{route('diskusi.show', $discussion->id)}}" title="Lihat diskusi">{{ $discussion->judul_diskusi }}</a>
 						</td>

@@ -32,7 +32,7 @@ class User extends Authenticatable
 	}
 
 	public function kelas(){
-		return $this->hasMany('App\User');
+		return $this->hasOne('App\Classroom', 'id', 'id_kelas');
 	}
 
 }
