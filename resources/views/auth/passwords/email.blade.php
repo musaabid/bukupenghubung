@@ -15,32 +15,8 @@
 						</div>
 					@endif
 
-					<form role="form" method="POST" action="{{ route('password.email') }}">
-						{{ csrf_field() }}
-
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-									<label for="email">Alamat E-Mail</label>
-									<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-									@if ($errors->has('email'))
-										<span class="help-block">
-											<strong>{{ $errors->first('email') }}</strong>
-										</span>
-									@endif
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-xs-12 col-md-6 pull-right">
-								<button type="submit" class="btn btn-primary btn-block">Ganti Password</button>
-							</div>
-							<div class="col-xs-12 col-md-6 pull-left">
-								<a class="btn btn-link btn-block" href="/login">Kembali ke Login</a>
-							</div>
-						</div>
-					</form>
+					<p>Silahkan menghubungi pihak administrasi sekolah untuk meminta password baru</p>
+					<a href="{{route('login')}}" class="btn btn-primary">Kembali ke login</a> 
 				</div>
 			</div>
 		</div>

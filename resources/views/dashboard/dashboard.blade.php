@@ -10,9 +10,7 @@
 
 @section('content')
 	@if (Auth::User())
-		@if( Auth::User()->level == 'admin' )
-			@include('dashboard._admin')
-		@elseif( Auth::User()->level == 'guru' )
+		@if( Auth::User()->level == 'admin' || Auth::User()->level == 'guru' )
 			@include('dashboard._guru')
 		@elseif( Auth::User()->level == 'siswa' )
 			@include('dashboard._siswa')
