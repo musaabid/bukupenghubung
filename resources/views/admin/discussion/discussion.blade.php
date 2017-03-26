@@ -37,11 +37,15 @@
 				</div>
 				<div class="panel-body" style="padding: 0">
 					<div class="topic">
-						{{$data['main_discussion']->isi_diskusi}}
+						<div class="discussion-pp"><img class="img-responsive" src="{{asset('uploads/avatars/' . $data['main_discussion']->teacher->foto)}}" alt="{{$data['main_discussion']->teacher->nama}}"></div> {{$data['main_discussion']->isi_diskusi}}
 					</div>
 					<div id="discussions" class="discussions">
 						@foreach($data['discussions'] as $diskusi)
 							<div class="discussion-item clearfix">
+								@php
+									$foto = $diskusi->pengirim == 'guru' ? $diskusi->teacher->foto : $diskusi->student->foto;
+								@endphp
+								<div class="discussion-pp {{$diskusi->pengirim == 'guru' ? 'pull-left' : 'pull-right'}}"><img class="img-responsive" src="{{asset('uploads/avatars/' . $foto)}}" alt="{{$diskusi->pengirim == 'guru' ? $diskusi->teacher->nama : $diskusi->student->nama}}"></div>
 								<div class="discussion-item-content-wrapper {{$diskusi->pengirim == 'guru' ? 'pull-left' : 'pull-right'}}">
 									<div class="discussion-item-content">{{$diskusi->isi_diskusi}}</div>
 									<span class="discussion-meta">{{Helper::humantime($diskusi->created_at)}}</span>

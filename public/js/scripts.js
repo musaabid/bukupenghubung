@@ -40,6 +40,44 @@
 			]
 		});
 
+		$('#datatable_pengumuman').DataTable({
+			responsive: {
+        		details: {
+           		type: "column"
+        		}
+   		},
+			language: datatable_language,
+			columnDefs: [
+				{
+					targets: [0,4],
+					orderable: false,
+					searchable: false
+				}
+			],
+			order: [
+				[ 3, "desc" ]
+			]
+		});
+
+		$('#datatable_pengumuman_guru').DataTable({
+			responsive: {
+        		details: {
+           		type: "column"
+        		}
+   		},
+			language: datatable_language,
+			columnDefs: [
+				{
+					targets: [3],
+					orderable: false,
+					searchable: false
+				}
+			],
+			order: [
+				[ 2, "desc" ]
+			]
+		});
+
 		$('#datatable_diskusi').DataTable({
 			responsive: {
         		details: {
@@ -55,7 +93,7 @@
 				}
 			],
 			order: [
-				[ 3, "asc" ]
+				[ 3, "desc" ]
 			]
 		});
 
@@ -74,7 +112,7 @@
 				}
 			],
 			order: [
-				[ 2, "asc" ]
+				[ 2, "desc" ]
 			]
 		});
 
@@ -204,9 +242,72 @@
 		if( Laravel.route == 'diskusi.show' ){
 			setInterval(function() {
 				$('#discussions').load( location.href + ' #discussions > *');
-				$("#discussions").scrollTop($("#discussions")[0].scrollHeight);
 			}, 1000);
+			$("#discussions").scrollTop($("#discussions")[0].scrollHeight);
 		}
+
+
+		/* Chart agama */
+		var chart_agama = new Chart( $('#chart_agama'),{
+			type: 'pie',
+			data: {
+				labels: ['Islam','Kristen','Katolik','Hindu','Buddha','Konghucu','lain'],
+				datasets: [{
+					data: [
+						bp.agama.islam, 
+						bp.agama.kristen, 
+						bp.agama.katolik,
+						bp.agama.hindu,
+						bp.agama.buddha,
+						bp.agama.konghucu,
+						bp.agama.lainnya
+					],
+					backgroundColor: ["#27ae60","#e74c3c","#8e44ad","#e67e22","#f1c40f","#95a5a6","#34495e"],
+					hoverBackgroundColor: ["#27ae60","#e74c3c","#8e44ad","#e67e22","#f1c40f","#95a5a6","#34495e"]
+				}]
+			},
+			options: {
+				animation:{
+					animateScale:true
+				},
+				tooltips:{
+					callbacks: {
+						afterBody(Items, data){
+							return ' siswa';
+						}
+					}
+				}
+			}
+		});
+
+		/* Chart jenis kelamin */
+		var chart_jenis_kelamin = new Chart( $('#chart_jenis_kelamin'),{
+			type: 'pie',
+			data: {
+				labels: ['Laki-laki','Perempuan'],
+				datasets: [{
+					data: [
+						bp.jenis_kelamin.l, 
+						bp.jenis_kelamin.p, 
+					],
+					backgroundColor: ["#3498db","#FF4C83"],
+					hoverBackgroundColor: ["#3498db","#FF4C83"]
+				}]
+			},
+			options: {
+				animation:{
+					animateScale:true
+				},
+				tooltips:{
+					callbacks: {
+						afterBody(Items, data){
+							return ' siswa';
+						}
+					}
+				}
+			}
+		});
+
 	});
 
 
@@ -221,5 +322,6 @@
 		}
 	}
 
+	
 
 })(jQuery);

@@ -99,12 +99,41 @@ class DiscussionController extends Controller{
 	// Halaman detail diskusi
 	public function discussion(Request $request, $id){
 		$data['main_discussion'] 	= Discussion::find($id);
-		$data['discussions']			= Discussion::where([
-			['id_parent', '=', $id],
-			['id_siswa', '=', $data['main_discussion']->id_siswa]
-		])->orderBy('created_at', 'asc')->get();
-		return view('admin.discussion.discussion')->with('data', $data);
-		//return redirect()->route('kelas.edit', $id);
+
+		// Tandai sudah dibaca jika yang membuka adalah siswa
+		if( $request->user()->level == 'siswa' ){
+			Discussion::where('id', $id)->update(['dibaca' => '1']); // Update status sudah dibaca
+		}
+
+		if( ($request->user()->level == 'siswa' && $request->user()->id == $data['main_discussion']->id_siswa) || 
+			( $request->user()->level == 'admin' || $request->user()->level == 'guru') 
+				&& ( count($request->user()->classroom) > 0 && $request->user()->id == $data['main_discussion']->id_wali_kelas ) ){
+
+			// Tandai sudah dibaca jika yang membuka ada penerima
+			if($request->user()->level == 'admin' || $request->user()->level == 'guru'){
+				Discussion::where([
+					['id_parent',	'=', $id],
+					['id_siswa', 	'=', $data['main_discussion']->id_siswa],
+					['pengirim', '=', 'siswa' ]
+				])->update(['dibaca' => '1']);
+			} elseif($request->user()->level == 'siswa') {
+				Discussion::where([
+					['id_parent', '=', $id],
+					['id_siswa', '=', $data['main_discussion']->id_siswa],
+					['pengirim', '=', 'guru' ]
+				])->update(['dibaca' => '1']);
+			}
+			
+			$data['discussions']	= Discussion::where([
+				['id_parent', '=', $id],
+				['id_siswa', '=', $data['main_discussion']->id_siswa]
+			])->orderBy('created_at', 'asc')->get();
+			
+			return view('admin.discussion.discussion')->with('data', $data);
+		
+		} else {
+			return view('error.restricted');
+		}
 	}
 
 	// Fungsi balas diskusi

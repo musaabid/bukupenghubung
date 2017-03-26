@@ -169,7 +169,88 @@ body.login {
 			.discussion-item-content-wrapper.pull-right .discussion-meta {
 				text-align: right;
 			}
+		.discussion-pp {
+			width: 40px;
+			height: 40px;
+			display: inline-block;
+			vertical-align: middle;
+		}
+			.discussion-pp.pull-right {
+				margin-left: 10px;
+			}
+			.discussion-pp.pull-left {
+				margin-right: 10px;
+			}
+			.discussion-pp img {
+				border-radius: 60px;
+			}
 
 .discussion-form {
 	padding: 20px;
+}
+
+/* Color counter */
+.color-counter {
+	position: relative;
+	padding: 15px 20px;
+	border-radius: 4px;
+	margin-bottom: 30px;
+}
+	.color-counter.orange {
+		background: #e67e22;
+		color: #FFF;
+	}
+	.color-counter.green{
+		background: #2ecc71;
+		color: #fff;
+	}
+	.color-counter.asphalt {
+		background: #34495e;
+		color: #FFF;
+	}
+	.color-counter.purple {
+		background: #9b59b6;
+		color: #fff;
+	}
+	.color-counter.darkblue {
+		background: #2c3e50;
+		color: #FFF;
+	}
+	.color-counter .cc-icon {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		font-size: 56px;
+		opacity: 0.7;
+	}
+	.color-counter .cc-number {
+		font-size: 36px;
+		font-weight: bold;
+		display: block;
+		text-align: right;
+	}
+	.color-counter .cc-label {
+		display: block;
+		text-align: right;
+	}
+	a.cc-link:hover, a.cc-link:focus {
+		text-decoration: none;
+	}
+
+/* Dashboard */
+.dashboard h2 {
+	margin-top: 0;
+}
+
+/* Panel */
+.panel.clean-box {
+	border: none;
+}
+	.panel.clean-box .panel-body {
+		padding: 0;
+	}
+
+/* Pengumuman */
+.pengumuman .tgl {
+	font-weight: bold;
 }

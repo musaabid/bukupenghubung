@@ -156,7 +156,8 @@
 										<option value="Kristen" {{ $post->agama == 'Kristen' ? 'selected' : '' }}>Kristen</option>
 										<option value="Katolik" {{ $post->agama == 'Katolik' ? 'selected' : '' }}>Katolik</option>
 										<option value="Hindu" {{ $post->agama == 'Hindu' ? 'selected' : '' }}>Hindu</option>
-										<option value="Budha" {{ $post->agama == 'Budha' ? 'selected' : '' }}>Budha</option>
+										<option value="Buddha" {{ $post->agama == 'Buddha' ? 'selected' : '' }}>Buddha</option>
+										<option value="Konghucu" {{ $post->agama == 'Konghucu' ? 'selected' : '' }}>Konghucu</option>
 										<option value="Lainnya" {{ $post->agama == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
 									</select>
 								</div>

@@ -32,10 +32,6 @@
 							</li>
 						@endif
 						
-						<li class="{{ Request::is('pengumuman') || Request::is('pengumuman/*') || Request::is('pengumuman/*/edit') ? 'active' : '' }}">
-							<a href="{{route('pengumuman.index')}}" >Pengumuman</a>
-						</li>
-
 						@if(Auth::User()->level == 'siswa')
 							<li class="{{ Request::is('diskusi') || Request::is('diskusi/*') || Request::is('diskusi/*/siswa') ? 'active' : '' }}">
 								<a href="{{route('diskusi.student', Auth::User()->id)}}" >Diskusi</a>
@@ -45,6 +41,10 @@
 								<a href="{{route('diskusi.index')}}" >Diskusi</a>
 							</li>
 						@endif
+
+						<li class="{{ Request::is('pengumuman') || Request::is('pengumuman/*') || Request::is('pengumuman/*/edit') ? 'active' : '' }}">
+							<a href="{{route('pengumuman.index')}}" >Pengumuman</a>
+						</li>
 
 						@if( Auth::User()->level == 'admin' )								
 							<li class="{{ Request::is('profil-sekolah') ? 'active' : '' }}">
@@ -60,7 +60,7 @@
 						@if (Auth::User())
 
 							<!-- <li><a href="#"><i class="fa fa-bell-o fa-lg"></i> <span class="badge">14</span></a></li> -->
-							<li><a href="#" data-toggle="tooltip" data-placement="bottom" title="14 diskusi aktif"><i class="fa fa-book fa-lg"></i> <span class="badge">14</span></a></li>
+							<li><a href="{{Auth::User()->level == 'siswa' ? route('diskusi.student', Auth::User()->id) : route('diskusi.index')}}" data-toggle="tooltip" data-placement="bottom" title="{{Helper::belumdibaca(Auth::User()->id, Auth::User()->level == 'admin' || Auth::User()->level == 'guru' ? 'siswa' : 'guru')}} pesan belum dibaca"><i class="fa fa-bell-o fa-lg"></i> <span class="badge">{{Helper::belumdibaca(Auth::User()->id, Auth::User()->level == 'admin' || Auth::User()->level == 'guru' ? 'siswa' : 'guru')}}</span></a></li>
 							<li class="dropdown menu-with-icon">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 									<span class="nav-profile"><img src="{{ asset('uploads/avatars/' . Auth::User()->foto ) }}" alt="{{ Auth::User()->nama }}"></span> 

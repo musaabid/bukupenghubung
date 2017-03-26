@@ -14,7 +14,7 @@
 					<div class="panel-body">
 						<img style="width:100%; margin-bottom: 20px;" class="img-responsive" src="{{asset('uploads/avatars/' . $data['student']->foto)}}" alt="{{$data['student']->nama}}">
 						<p><strong>{{$data['student']->nama}}</strong> ({{$data['student']->nama_panggilan}})</p>
-						<p><strong>NIP</strong>: {{ $data['student']->noinduk }}</p>
+						<p><strong>NIS</strong>: {{ $data['student']->noinduk }}</p>
 						<p><strong>Telepon</strong>:<br />{{$data['student']->telepon_1}} {{!empty($data['student']->telepon_2) ? '/ ' . $data['student']->telepon_2 : ''}}</p>
 						<p><strong>Alamat</strong>:<br />{{$data['student']->alamat}}</p>
 						<p><strong>Tempat &amp; tanggal lahir</strong>:<br />{{$data['student']->tempat_lahir}}, {{Helper::format_tanggal($data['student']->tanggal_lahir, 'd-m-Y')}}</p>
@@ -59,10 +59,13 @@
 					</div>
 				@endif
 			@endforeach
+			<div class="clearfix">
+				<div class="alert alert-warning pull-left">Belum dibaca</div>
+			</div>
 			<table id="datatable_diskusi_siswa" class="table table-hover table-bordered">
 				<thead>
 					<tr>
-						<th width="40%">Judul</th>
+						<th width="40%">Judul Diskusi</th>
 						<th>Dibuat</th>
 						<th>Update terakhir</th>
 						<th>Aksi</th>
@@ -70,9 +73,13 @@
 				</thead>
 				<tbody>
 					@foreach( $data['discussions'] as $discussion )
-						<tr>
+						@php
+							$unread = Helper::diskusiunread($discussion->id, Auth::User()->level == 'admin' || Auth::User()->level == 'guru' ? 'siswa' : 'guru');	
+						@endphp
+						<tr class="{{$unread > 0 ? 'warning' : ''}}">
 							<td data-search="{{$discussion->judul_diskusi}}">
-								<a href="{{route('diskusi.show', $discussion->id)}}" title="Lihat diskusi">{{ $discussion->judul_diskusi }}</a>
+								<a href="{{route('diskusi.show', $discussion->id)}}" title="Lihat diskusi">{{ $discussion->judul_diskusi }} <span class="status-hover"><strong>{{ ! empty($unread) ? '(' . $unread . ' belum dibaca)' : ''}}</strong></span></a> 
+
 							</td>
 							<td data-order="{{ $discussion->created_at }}">{{ Helper::humantime( $discussion->created_at ) }}</td>
 							<td data-order="{{ $discussion->updated_at }}">{{ empty($discussion->updated_at) ? '-' : Helper::humantime( $discussion->updated_at ) }}</td>

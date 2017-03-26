@@ -24,10 +24,13 @@
 				</div>
 			@endif
 		@endforeach
+		<div class="clearfix">
+			<div class="alert alert-warning pull-left">Belum dibaca</div>
+		</div>
 		<table id="datatable_diskusi" class="table table-hover table-bordered">
 			<thead>
 				<tr>
-					<th width="30%">Judul</th>
+					<th width="30%">Judul Diskusi</th>
 					<th width="20%">Siswa</th>
 					<th>Dibuat</th>
 					<th>Update terakhir</th>
@@ -36,9 +39,12 @@
 			</thead>
 			<tbody>
 				@foreach( $data['discussions'] as $discussion )
-					<tr>
+					@php
+						$unread = Helper::diskusiunread($discussion->id, Auth::User()->level == 'admin' || Auth::User()->level == 'guru' ? 'siswa' : 'guru');	
+					@endphp
+					<tr class="{{$unread > 0 ? 'warning' : ''}}">
 						<td data-search="{{$discussion->judul_diskusi}}">
-							<a href="{{route('diskusi.show', $discussion->id)}}" title="Lihat diskusi">{{ $discussion->judul_diskusi }}</a>
+							<a href="{{route('diskusi.show', $discussion->id)}}" title="Lihat diskusi">{{ $discussion->judul_diskusi }} <span class="status-hover"><strong>{{ ! empty($unread) ? '(' . $unread . ' belum dibaca)' : ''}}</strong></span></a> 
 						</td>
 						<td data-search="{{$discussion->student->nama}}"><a href="{{route('diskusi.student', $discussion->student->id)}}" title="Lihat diskusi dengan {{$discussion->student->nama}}">{{$discussion->student->nama}}</a></td>
 						<td data-order="{{ $discussion->created_at }}">{{ Helper::humantime( $discussion->created_at ) }}</td>

@@ -27,6 +27,7 @@ Route::delete('kelas', 'ClassroomController@bulkDestroy')->name('kelas.bulkDestr
 
 // Routing pengumuman
 Route::resource('pengumuman', 'AnnouncementController');
+Route::delete('pengumuman', 'AnnouncementController@bulkDestroy')->name('pengumuman.bulkDestroy');
 
 // Routing diskusi
 Route::get('diskusi', 'DiscussionController@index')->name('diskusi.index'); // List semua diskusi, hanya untuk guru

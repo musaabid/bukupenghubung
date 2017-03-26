@@ -1,6 +1,7 @@
 <?php
 
 use App\School;
+use App\Discussion;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -31,6 +32,33 @@ class Helper {
 		Carbon::setLocale('id');
 		$tanggal = Carbon::parse($tanggal);
 		return $tanggal->diffForHumans();
+	}
+
+	public static function belumdibaca($id_penerima, $pengirim){
+		if($pengirim == 'guru'){
+			$unread = Discussion::where([
+				['id_siswa', '=', $id_penerima],
+				['pengirim', '=', $pengirim],
+				['dibaca', '=', '0']
+			])->get();
+		} elseif($pengirim == 'siswa') {
+			$unread = Discussion::where([
+				['id_wali_kelas', '=', $id_penerima],
+				['pengirim', '=', $pengirim],
+				['dibaca', '=', '0']
+			])->get();
+		}
+		return count($unread);
+	}
+
+	public static function diskusiunread($id_parent, $pengirim){
+		$unread = Discussion::where([
+			['id_parent', '=', $id_parent],
+			['pengirim', '=', $pengirim],
+			['dibaca', '=', '0']
+		])->get();
+
+		return count($unread);
 	}
 
 }
