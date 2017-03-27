@@ -23,85 +23,86 @@
 			)
 		]) !!};
 	</script>
+	@if(Auth::User()->level == 'admin')
+		<h2>Statistik Sekolah</h2>
+		<div class="row">
+			<div class="col-xs-6 col-md-3">
+				<a href="{{route('admin.index')}}?l=guru" class="cc-link">
+					<div class="color-counter orange">
+						<span class="cc-icon"><i class="fa fa-graduation-cap"></i></span>
+						<span class="cc-number">{{count($data['guru'])}}</span>
+						<span class="cc-label">GURU</span>
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<a href="{{route('admin.index')}}?l=siswa" class="cc-link">
+					<div class="color-counter green">
+						<span class="cc-icon"><i class="fa fa-user-circle-o"></i></span>
+						<span class="cc-number">{{count($data['siswa_sekolah'])}}</span>
+						<span class="cc-label">SISWA</span>
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<a href="{{route('kelas.index')}}" class="cc-link">
+					<div class="color-counter asphalt">
+						<span class="cc-icon"><i class="fa fa-users"></i></span>
+						<span class="cc-number">{{count($data['kelas'])}}</span>
+						<span class="cc-label">KELAS</span>
+					</div>
+				</a>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<a href="{{route('diskusi.index')}}" class="cc-link">
+					<div class="color-counter purple">
+						<span class="cc-icon"><i class="fa fa-comments-o"></i></span>
+						<span class="cc-number">{{count($data['diskusi_sekolah'])}}</span>
+						<span class="cc-label">DISKUSI</span>
+					</div>
+				</a>
+			</div>
+		</div>
 
-	<h2>Statistik Sekolah</h2>
-	<div class="row">
-		<div class="col-xs-6 col-md-3">
-			<a href="{{route('admin.index')}}?l=guru" class="cc-link">
-				<div class="color-counter orange">
-					<span class="cc-icon"><i class="fa fa-graduation-cap"></i></span>
-					<span class="cc-number">{{count($data['guru'])}}</span>
-					<span class="cc-label">GURU</span>
+		<div class="row">
+			<div class="col-xs-12 col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">Agama Siswa {{Helper::nama_sekolah()}}</div>
+					<div class="panel-body">
+						<canvas id="chart_agama"></canvas>
+					</div>
 				</div>
-			</a>
-		</div>
-		<div class="col-xs-6 col-md-3">
-			<a href="{{route('admin.index')}}?l=siswa" class="cc-link">
-				<div class="color-counter green">
-					<span class="cc-icon"><i class="fa fa-user-circle-o"></i></span>
-					<span class="cc-number">{{count($data['siswa_sekolah'])}}</span>
-					<span class="cc-label">SISWA</span>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">Jenis Kelamin Siswa {{Helper::nama_sekolah()}}</div>
+					<div class="panel-body">
+						<canvas id="chart_jenis_kelamin"></canvas>
+					</div>
 				</div>
-			</a>
-		</div>
-		<div class="col-xs-6 col-md-3">
-			<a href="{{route('kelas.index')}}" class="cc-link">
-				<div class="color-counter asphalt">
-					<span class="cc-icon"><i class="fa fa-users"></i></span>
-					<span class="cc-number">{{count($data['kelas'])}}</span>
-					<span class="cc-label">KELAS</span>
-				</div>
-			</a>
-		</div>
-		<div class="col-xs-6 col-md-3">
-			<a href="{{route('diskusi.index')}}" class="cc-link">
-				<div class="color-counter purple">
-					<span class="cc-icon"><i class="fa fa-comments-o"></i></span>
-					<span class="cc-number">{{count($data['diskusi_sekolah'])}}</span>
-					<span class="cc-label">DISKUSI</span>
-				</div>
-			</a>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-12 col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">Agama Siswa {{Helper::nama_sekolah()}}</div>
-				<div class="panel-body">
-					<canvas id="chart_agama"></canvas>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<div class="panel panel-primary clean-box">
+					<div class="panel-heading">Pengumuman</div>
+					<div class="panel-body">
+						<ul class="list-group pengumuman">
+							@foreach( $data['announcements'] as $pengumuman )
+								<li class="list-group-item">
+									@if( ! empty($pengumuman->id_kelas) )
+										<span class="badge">Kelas {{$pengumuman->classroom->nama_kelas}}</span>
+									@endif
+									<span class="tgl">{{Helper::format_tanggal($pengumuman->created_at, 'd-m-Y')}}</span> - 
+									{{$pengumuman->pengumuman}}
+								</li>
+							@endforeach
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">Jenis Kelamin Siswa {{Helper::nama_sekolah()}}</div>
-				<div class="panel-body">
-					<canvas id="chart_jenis_kelamin"></canvas>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-4">
-			<div class="panel panel-primary clean-box">
-				<div class="panel-heading">Pengumuman</div>
-				<div class="panel-body">
-					<ul class="list-group pengumuman">
-						@foreach( $data['announcements'] as $pengumuman )
-							<li class="list-group-item">
-								@if( ! empty($pengumuman->id_kelas) )
-									<span class="badge">Kelas {{$pengumuman->classroom->nama_kelas}}</span>
-								@endif
-								<span class="tgl">{{Helper::format_tanggal($pengumuman->created_at, 'd-m-Y')}}</span> - 
-								{{$pengumuman->pengumuman}}
-							</li>
-						@endforeach
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<hr />
+		<hr />
+	@endif
 
 	<h2>Statistik Kelas {{Auth::User()->classroom->nama_kelas}}</h2>
 	<div class="row">
