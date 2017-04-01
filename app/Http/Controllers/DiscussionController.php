@@ -185,6 +185,16 @@ class DiscussionController extends Controller{
 		// Redirect ke halaman edit dengan pesan
 		$request->session()->flash('alert-success', 'Profil sekolah berhasil diupdate!');
 		return redirect()->route('sekolah.index');
+	}
 
+	// Fungsi hapus pengumuman
+	public function destroy(Request $request, $id){
+		if( ( $request->user()->level == 'admin' || $request->user()->level == 'guru') && count($request->user()->classroom) > 0 ){
+			Discussion::destroy($id);
+			Session::flash('alert-success', 'Diskusi berhasil dihapus!');
+			return redirect()->route('diskusi.index');
+		} else {
+			return view('error.restricted');
+		}
 	}
 }
